@@ -1,6 +1,38 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+      
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3307/blog?serverTimezone=Asia/Seoul
     username: hong
     password: 1234
+    
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false  #JPA가 사용하는 기본 넘버링을 사용하지 않겠다!
+    show-sql: true                                           # sysout(sql);
+    #properties:
+      #hibernate.format_sql: true                # 줄바꿔서 sysout()해줌
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+      
+hong:
+  key: hong1234
