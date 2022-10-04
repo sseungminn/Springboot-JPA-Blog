@@ -24,8 +24,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
-//	private final CorsFilter corsFilter;
-	
 	@Autowired
 	private PrincipalOauth2UserService principalOauth2UserService;
 	
@@ -53,7 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.addFilterBefore(new MyFilter3(), SecurityContextPersistenceFilter.class);
 		http
 			.csrf().disable() // csrf 토큰 비활성화 (테스트시 걸어두는게 좋음)
 			.authorizeRequests()
@@ -72,20 +69,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.loginPage("/auth/loginForm")
 				.userInfoEndpoint()
 				.userService(principalOauth2UserService);
-//			.and()
-//			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//			.and()
-//			.addFilter(corsFilter) // 모든 요청 허용
-//			.formLogin().disable()
-//			.httpBasic().disable()
-//			.addFilter(new JwtAuthenticationFilter(authenticationManager())) //AuthenticationManager
-//			.authorizeRequests()
-//			.antMatchers("/api/vi/user/**")
-//			.access("hasRole('USER') or hasRole('MANAGER') or hasRole('ADMIN')")
-//			.antMatchers("/api/vi/manager/**")
-//			.access("hasRole('MANAGER') or hasRole('ADMIN')")
-//			.antMatchers("/api/vi/admin/**")
-//			.access("hasRole('ADMIN')")
-//			.anyRequest().permitAll();
 	}
 }
