@@ -9,12 +9,35 @@ let index = {
 	},
 	
 	save: function(){
-//		alert("user의 save함수 호출됨");
+		let nickname = "";
+		let tmp = "";
+			if($("#originNickname").val().length % 3 ==0){
+				for(i=0; i<$("#originNickname").val().length/3; i++){ tmp += "*";}
+				nickname = $("#originNickname").val().substring(0, $("#originNickname").val().length/3) + tmp + $("#originNickname").val().substring($("#originNickname").val().length/3*2);
+			}
+			else if($("#originNickname").val().length % 3 ==1){
+				if($("#originNickname").val().length == 1){
+					nickname = $("#originNickname").val();
+				}else{
+					for(i=0; i<=Math.ceil($("#originNickname").val().length/3); i++) {tmp += "*";}
+					nickname = $("#originNickname").val().substring(0, Math.floor($("#originNickname").val().length/3)) + tmp + $("#originNickname").val().substring(Math.floor($("#originNickname").val().length/3*2)+1);
+				}		
+			} 
+			else if($("#originNickname").val().length % 3 ==2){
+				for(i=0; i<Math.ceil($("#originNickname").val().length/3)+1; i++) {tmp += "*";}
+				if($("#originNickname").val().length==2){
+					nickname = $("#originNickname").val().substring(0,1) + "*";
+				}else{
+					nickname = $("#originNickname").val().substring(0, Math.floor($("#originNickname").val().length/3)) + tmp + $("#originNickname").val().substring(Math.floor($("#originNickname").val().length/3*2)+1);
+				}			
+			}
+			
 		let data = {
 			username: $("#username").val(),
 			password: $("#password").val(),
 			email: $("#email").val(),
-			nickname: $("#nickname").val()
+			originNickname: $("#originNickname").val(),
+			nickname : nickname
 		};
 		
 //		console.log(data);
@@ -32,12 +55,13 @@ let index = {
 			contentType: "application/json; charset=utf-8", // body데이터(요청데이터)가 어떤 타입인지(MIME) 
 			dataType: "json" // 응답결과를 어떤 타입데이터로 받을 건지 -> 이제는 default가 자바오브젝트로 변환해줌
 		}).done(function(response){ // 요청이 정상이면 done 수행
-			if(response === 500){
-				alert("회원가입을 실패했습니다.");
-			} else{
+			if(response.status == 200){
 				alert("회원가입이 완료되었습니다.");
 //				console.log(response);
-				location.href = "/";
+				location.href = "/auth/loginForm";
+			} else{
+				alert("회원가입을 실패했습니다.");
+				location.reload();
 			}
 		}).fail(function(error){ // 요청이 실패하면 fail 수행
 			alert(JSON.stringify(error));
@@ -45,21 +69,40 @@ let index = {
 	},
 	
 	update: function(){
+		let nickname = "";
+		let tmp = "";
+			if($("#originNickname").val().length % 3 ==0){
+				for(i=0; i<$("#originNickname").val().length/3; i++){ tmp += "*";}
+				nickname = $("#originNickname").val().substring(0, $("#originNickname").val().length/3) + tmp + $("#originNickname").val().substring($("#originNickname").val().length/3*2);
+			}
+			else if($("#originNickname").val().length % 3 ==1){
+				for(i=0; i<=Math.ceil($("#originNickname").val().length/3); i++) {tmp += "*";}
+				nickname = $("#originNickname").val().substring(0, Math.floor($("#originNickname").val().length/3)) + tmp + $("#originNickname").val().substring(Math.floor($("#originNickname").val().length/3*2)+1);		
+			} 
+			else if($("#originNickname").val().length % 3 ==2){
+				for(i=0; i<Math.ceil($("#originNickname").val().length/3)+1; i++) {tmp += "*";}
+				if($("#originNickname").val().length==2){
+					nickname = $("#originNickname").val().substring(0,1) + "*";
+				}else{
+					nickname = $("#originNickname").val().substring(0, Math.floor($("#originNickname").val().length/3)) + tmp + $("#originNickname").val().substring(Math.floor($("#originNickname").val().length/3*2)+1);
+				}			
+			}
+			
 		let data = {
 			id: $("#id").val(),
 			username: $("#username").val(),
 			password: $("#password").val(),
 			email: $("#email").val(),
-			nickname: $("#nickname").val()
+			originNickname: $("#originNickname").val(),
+			nickname: nickname
 		};
-		
 		$.ajax({
 			type: "PUT",
 			url: "/user",
 			data: JSON.stringify(data), 
 			contentType: "application/json; charset=utf-8", 
 			dataType: "json" 
-		}).done(function(){ 
+		}).done(function(){
 			alert("수정이 완료되었습니다.");
 			location.href = "/";
 		}).fail(function(error){ 

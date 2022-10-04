@@ -21,9 +21,7 @@ public class UserService {
 	
 	@Transactional(readOnly = true)
 	public User 회원찾기(String username) {
-		User user = userRepository.findByUsername(username).orElseGet(()->{
-			return new User();
-		});
+		User user = userRepository.findByUsername(username);
 		return user;
 	}
 	
@@ -51,6 +49,7 @@ public class UserService {
 			String encPassword = encoder.encode(rawPassword);
 			persistance.setPassword(encPassword);
 			persistance.setEmail(user.getEmail());
+			persistance.setOriginNickname(user.getOriginNickname());
 		}
 		
 		// 회원수정 함수 종료시 = 서비스 종료시 = 트랜잭션 종료 = commit 자동수행됨

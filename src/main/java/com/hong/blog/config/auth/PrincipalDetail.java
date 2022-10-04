@@ -2,9 +2,11 @@ package com.hong.blog.config.auth;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import com.hong.blog.model.User;
 
@@ -14,12 +16,21 @@ import lombok.Getter;
 // 스프링 시큐리티의 고유한 세션 저장소에 저장함
 @SuppressWarnings("serial")
 @Getter
-public class PrincipalDetail implements UserDetails{
+public class PrincipalDetail implements UserDetails, OAuth2User{
 	
 	private User user; // 콤포지션 (객체를 품고있음) -> 상속아님
+	private Map<String, Object> attributes;
+	
+	//OAuth 로그인
+	public PrincipalDetail(User user, Map<String, Object> attributes) {
+		this.user = user;
+		this.attributes = attributes;
+	}
 
+	//일반 로그인
 	public PrincipalDetail(User user) {
 		this.user = user;
+		
 	}
 	
 	@Override
@@ -61,10 +72,18 @@ public class PrincipalDetail implements UserDetails{
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		
 		Collection<GrantedAuthority> collectors = new ArrayList<>();
 		collectors.add(()->{return "ROLE_" + user.getRole();});
-		
 		return collectors;
+	}
+
+	@Override
+	public Map<String, Object> getAttributes() {
+		return attributes;
+	}
+
+	@Override
+	public String getName() {
+		return null;
 	}
 }

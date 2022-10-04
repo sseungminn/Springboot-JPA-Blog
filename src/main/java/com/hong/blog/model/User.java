@@ -40,6 +40,9 @@ public class User {
 	private String email;		   // 이메일
 	
 	@Column(nullable = false, length=30)
+	private String originNickname; // 원본 닉네임
+	
+	@Column(length=30)
 	private String nickname; // 닉네임
 	
 	// @ColumnDefault("user")
@@ -51,5 +54,17 @@ public class User {
 	
 	@CreationTimestamp // 시간 자동 입력
 	private Timestamp createDate; // 유저 가입 시간
+	
+	@Builder
+	public User(String username, String password, String email, String nickname, RoleType role,String oauth, String originNickname, Timestamp createDate) {
+		this.username = username;
+		this.password = password;
+		this.nickname = nickname;
+		this.email = email;
+		this.role = role;
+		this.oauth = oauth;
+		this.originNickname = originNickname;
+		this.createDate = createDate;
+	}
 	
 }

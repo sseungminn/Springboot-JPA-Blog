@@ -1,7 +1,5 @@
 package com.hong.blog.repository;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.hong.blog.model.User;
@@ -12,7 +10,9 @@ import com.hong.blog.model.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	// SELECT * FROM user WHERE username = ?
-	Optional<User> findByUsername(String username);
+//	Optional<User> findByUsername(String username);
+	
+	User findByUsername(String username);
 }
 
 

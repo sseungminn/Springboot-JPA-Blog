@@ -32,6 +32,10 @@ import com.hong.blog.service.UserService;
 @Controller
 public class UserController {
 
+	private String grant_type = "authorization_code";
+	private String client_id = "e5056e73c622d1ca7da441fa86d21d2b";
+	private String redirect_uri = "http://localhost:8000/auth/kakao/callback";
+	
 	@Value("${hong.key}")
 	private String hongKey;
 	
@@ -61,12 +65,11 @@ public class UserController {
 		// HttpHeader 오브젝트 생성
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-
 		// HttpBody 오브젝트 생성
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-		params.add("grant_type", "authorization_code");
-		params.add("client_id", "e5056e73c622d1ca7da441fa86d21d2b");
-		params.add("redirect_uri", "http://localhost:8000/auth/kakao/callback");
+		params.add("grant_type", grant_type);
+		params.add("client_id", client_id);
+		params.add("redirect_uri", redirect_uri);
 		params.add("code", code);
 
 		// HttpHeader와 HttpBody를 하나의 오브젝트에 담기
@@ -111,23 +114,45 @@ public class UserController {
 //		System.out.println("카카오 닉네임1 : " + kakaoProfile.getKakao_account().getProfile().getNickname());
 //		System.out.println("카카오 닉네임2 : " + kakaoProfile.getProperties().nickname);
 //		System.out.println("카카오 닉네임3 : " + kakaoProfile.getKakao_account().getProfile().nickname);
-//		System.out.println("블로그에 넣을 유저네임 : " + kakaoProfile.getKakao_account().getEmail() + "_" + kakaoProfile.getId());
-//		System.out.println("블로그에 넣을 이메일 : " + kakaoProfile.getKakao_account().getEmail());
-//		System.out.println("블로그에 넣을 패스워드 : " + hongKey);
+//		System.out.println("DB에 넣을 유저네임 : " + kakaoProfile.getKakao_account().getEmail() + "_" + kakaoProfile.getId());
+//		System.out.println("DB에 넣을 이메일 : " + kakaoProfile.getKakao_account().getEmail());
+//		System.out.println("DB에 넣을 패스워드 : " + hongKey);
 		// 2222222222222222222222222222222
-		
+		String originNickname = kakaoProfile.getKakao_account().getProfile().getNickname();
+		String tmp = "";
+		String nickname = "";
+		if(originNickname.length() % 3 == 0) {
+			for(int i=0; i<originNickname.length()/3; i++) {tmp += "*";}
+			nickname = originNickname.substring(0, originNickname.length()/3) + tmp + originNickname.substring(originNickname.length()/3*2);
+		}
+		if(originNickname.length() % 3 == 1) {
+			if(originNickname.length() == 1) {
+				nickname = originNickname;
+			}else {
+				for(int i=0; i<Math.ceil((double)originNickname.length()/3); i++) {tmp += "*";}
+				nickname = originNickname.substring(0, (int)Math.floor(originNickname.length()/3)) + tmp + originNickname.substring((int)Math.floor(originNickname.length()/3*2)+1);
+			}
+		}
+		if(originNickname.length() % 3 ==2) {
+			if(originNickname.length() == 2) {
+				nickname = originNickname.substring(0,1) + "*";
+			}else {
+				for(int i=0; i<Math.ceil(originNickname.length()/3); i++) {tmp += "*";}
+				nickname = originNickname.substring(0, (int)Math.floor(originNickname.length()/3)) + tmp + originNickname.substring((int)Math.floor(originNickname.length()/3*2)+1);
+			}
+		}
 		User kakaoUser = User.builder()
-							  .username(kakaoProfile.getKakao_account().getEmail() + "_" + kakaoProfile.getId())
+							  .username(kakaoProfile.getKakao_account().getEmail() + "_"+ kakaoProfile.getId())
 							  .password(hongKey)
 							  .email(kakaoProfile.getKakao_account().getEmail())
 							  .oauth("kakao")
-							  .nickname(kakaoProfile.getKakao_account().getProfile().getNickname())
+							  .originNickname(originNickname)
+							  .nickname(nickname)
 							  .build();
-		
 		// 이미 가입한 사람인지 체크
 		User originUser = userService.회원찾기(kakaoUser.getUsername());
-		
-		if(originUser.getUsername() == null) {
+		System.out.println(kakaoUser);
+		if(originUser == null) {
 			System.out.print("신규회원입니다. 자동으로 가입됩니다.");
 			userService.회원가입(kakaoUser);
 		}

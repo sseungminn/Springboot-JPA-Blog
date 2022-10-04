@@ -53,4 +53,9 @@ public class BoardApiController {
 		boardService.댓글삭제(replyId);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
+	
+	@PostMapping("token")
+	public String token() {
+		return "<h1>TOKEN</h1>";
+	}
 }

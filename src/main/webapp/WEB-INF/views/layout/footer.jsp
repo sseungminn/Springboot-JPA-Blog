@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <br/>
-<div class="jumbotron text-center" style="margin-bottom: 0">
-	<p>Created By Hong</p>
-	<p>📞 010-1111-2222</p>
-	<p>🏁 address : 대한민국 경기도 광주시 목현동</p>
+<div class="jumbotron text-center mt-auto" style="margin-bottom: 0;">
+	<h6>Created By Hong</h6>
+	<h6>📞 010-1111-2222</h6>
+	<h6>🏁 Seongnam-si, Gyeonggi-do, Republic of Korea</h6>
 </div>
 
 </body>
