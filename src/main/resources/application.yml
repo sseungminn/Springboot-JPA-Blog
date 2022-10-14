@@ -65,7 +65,7 @@ spring:
             - email
             client-name: Naver
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8000/login/oauth2/code/naver
+            redirect-uri: http://ec2-3-34-7-153.ap-northeast-2.compute.amazonaws.com:8000/login/oauth2/code/naver
           
         provider: 
           naver:
