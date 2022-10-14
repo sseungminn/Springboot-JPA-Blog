@@ -108,7 +108,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>BlogApplication</mainClass>
+							<mainClass>BlogApplication.class</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
