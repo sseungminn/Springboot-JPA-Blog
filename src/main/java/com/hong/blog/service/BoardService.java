@@ -33,6 +33,11 @@ public class BoardService {
 	}
 	
 	@Transactional(readOnly = true)
+	public Page<Board> 글검색목록(Pageable pageable, String search) {
+		return boardRepository.findByTitleContaining(pageable, search);
+	}
+	
+	@Transactional(readOnly = true)
 	public Board 글상세보기(int id) {
 		return boardRepository.findById(id)
 				.orElseThrow(()->{

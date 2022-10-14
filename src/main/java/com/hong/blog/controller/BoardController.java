@@ -23,9 +23,13 @@ public class BoardController {
 	
 	// 컨트롤러에서 세션을 어떻게 찾지?
 	@GetMapping({"", "/"})
-	public String index(Model model, @PageableDefault(size=3, sort="id", direction=Sort.Direction.DESC) Pageable pageable, HttpServletRequest request) {
-		
-		Page<Board> boardList = boardService.글목록(pageable);
+	public String index(Model model, @PageableDefault(size=5, sort="id", direction=Sort.Direction.DESC) Pageable pageable, String search, HttpServletRequest request) {
+		Page<Board> boardList;
+		if(search == null) {
+			boardList = boardService.글목록(pageable);	
+		} else {
+			boardList = boardService.글검색목록(pageable, search);
+		}
 		int nowPage = boardList.getPageable().getPageNumber() + 1; // 현재페이지 : 0 에서 시작하기에 1을 더해준다.
 		int firstlistpage = 1;
 		int lastlistpage = 10;
@@ -79,4 +83,5 @@ public class BoardController {
 	public String saveForm() {
 		return "board/saveForm";
 	}
+	
 }

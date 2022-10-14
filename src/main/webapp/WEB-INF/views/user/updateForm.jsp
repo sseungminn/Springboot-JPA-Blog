@@ -2,6 +2,17 @@
 
 <%@ include file="../layout/header.jsp"%>
 <script type="text/javascript" src="/js/btn_activate.js"></script>
+<script>
+
+//복붙방지
+function onKeyDown() {
+	var pressedKey = String.fromCharCode(event.keyCode).toLowerCase();
+	if (event.ctrlKey && (pressedKey == "c" || pressedKey == "v")) {
+		event.returnValue = false;
+	}
+}
+
+</script>
 <div class="container">
 	<form>
 		<input type="hidden" id="id" value="${principal.user.id }">
@@ -13,7 +24,7 @@
 	<c:if test="${empty principal.user.oauth }"> <!-- 카카오, 구글 가입자 아님 -->
 		<div class="form-group">
 			<label for="password">Password</label> 
-			<input type="password" class="form-control" placeholder="Enter password" id="password"  required>
+			<input type="password" class="form-control" placeholder="Enter password" id="password" onkeydown="onKeyDown()" oncontextmenu="return false;" required>
 		</div>
 	</c:if>
 		<div class="form-group">

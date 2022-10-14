@@ -4,10 +4,19 @@
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal"  var="principal" />
 </sec:authorize>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<script>
+function logout(){
+	check = confirm("로그아웃 하시겠습니까?");
+	if(check == true){
+		location.href="/logout";
+	}
+}
+</script>
+
 <title>Blog </title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,7 +49,7 @@
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link" href="/board/saveForm">글쓰기</a></li>
 						<li class="nav-item"><a class="nav-link" href="/user/updateForm">회원정보</a></li>
-						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link" onClick="logout()" style="cursor: pointer">로그아웃</a></li>
 					</ul>
 				</c:otherwise>
 				

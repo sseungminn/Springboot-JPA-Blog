@@ -3,13 +3,19 @@
 <%@ include file="../layout/header.jsp"%>
 <script>
 let page = new URLSearchParams(location.search).get('page');
+let search = new URLSearchParams(location.search).get('search');
 function list(){
-	location.href='/?page='+page;
+	location.href='/?page='+page+'&search='+search;
 }
 function updateBtn(){
-	location.href="/board/${board.id}/updateForm?page="+page;
+	location.href="/board/${board.id}/updateForm?page="+page+'&search='+search;
 }
-
+function replyDelete(boardId, replyId){
+	check = confirm("삭제하시겠습니까?");
+	if(check == true){
+		index.replyDelete(boardId, replyId);
+	}
+}
 </script>
 <div class="container">
 
@@ -64,7 +70,7 @@ function updateBtn(){
 					<div class="d-flex">
 						<div class="font-italic">${reply.user.nickname }&nbsp;</div>
 						<c:if test="${principal.user.username ==reply.user.username }">
-							<button onClick="index.replyDelete(${board.id}, ${reply.id})" class="badge">삭제</button>
+							<button onClick="replyDelete(${board.id}, ${reply.id})" class="badge">삭제</button>
 						</c:if>
 					</div>
 				</li>

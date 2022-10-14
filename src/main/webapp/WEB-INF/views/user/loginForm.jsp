@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 <script type="text/javascript" src="/js/btn_activate.js"></script>
+<script>
+// 복붙방지
+function onKeyDown() {
+	var pressedKey = String.fromCharCode(event.keyCode).toLowerCase();
+	if (event.ctrlKey && (pressedKey == "c" || pressedKey == "v")) {
+		event.returnValue = false;
+	}
+}
+</script>
 <c:if test="${not empty principal }">
 	<script>
 		location.href = "<c:url value='/'/>";
@@ -10,11 +19,11 @@
 <!-- 	<form action="/auth/loginProc" method="POST"> -->
 	<form action="/login" method="POST">
 		<div class="form-group">
-			<label for="username">ID</label> <input type="text" name="username" class="form-control" placeholder="Enter username" id="username">
+			<label for="username">ID</label> <input type="text" name="username" class="form-control" placeholder="Enter username" id="username" autofocus autocomplete="off">
 		</div>
 
 		<div class="form-group">
-			<label for="password">Password</label> <input type="password" name="password" class="form-control" placeholder="Enter password" id="password">
+			<label for="password">Password</label> <input type="password" name="password" class="form-control" placeholder="Enter password" id="password" onkeydown="onKeyDown()" oncontextmenu="return false;">
 		</div>
 		
 		<div class="text-center">

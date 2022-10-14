@@ -31,7 +31,7 @@ let index = {
 					nickname = $("#originNickname").val().substring(0, Math.floor($("#originNickname").val().length/3)) + tmp + $("#originNickname").val().substring(Math.floor($("#originNickname").val().length/3*2)+1);
 				}			
 			}
-			
+		
 		let data = {
 			username: $("#username").val(),
 			password: $("#password").val(),

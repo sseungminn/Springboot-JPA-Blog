@@ -3,8 +3,11 @@ let index = {
 		$("#btn-save").on("click", ()=>{ 
 			this.save();
 		});
-		$("#btn-delete").on("click", ()=>{ 
+		$("#btn-delete").on("click", ()=>{
+			check = confirm("삭제하시겠습니까?");
+			if(check==true){ 
 			this.deleteById();
+			}
 		});
 		$("#btn-update").on("click", ()=>{ 
 			this.update();

@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hong.blog.dto.ResponseDto;
@@ -44,5 +45,15 @@ public class UserApiController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
+	@PostMapping("/auth/usernameCheck")
+	public boolean idCheck(@RequestParam("username") String id) {
+		User user = userService.회원찾기(id);
+		if(user == null) { // 존재하는 회원이 없음 -> 가입 가능
+			return true;
+		}else {
+			return false;	
+		}
 	}
 }

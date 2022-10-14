@@ -90,7 +90,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 
-		System.out.println("카카오 액세스 토큰 : " + oauthToken.getAccess_token());
+//		System.out.println("카카오 액세스 토큰 : " + oauthToken.getAccess_token());
 
 		// 11111111111111111111111111111111111111
 		RestTemplate rt2 = new RestTemplate();
@@ -151,13 +151,13 @@ public class UserController {
 							  .build();
 		// 이미 가입한 사람인지 체크
 		User originUser = userService.회원찾기(kakaoUser.getUsername());
-		System.out.println(kakaoUser);
+//		System.out.println(kakaoUser);
 		if(originUser == null) {
-			System.out.print("신규회원입니다. 자동으로 가입됩니다.");
+			System.out.print("신규회원입니다. 자동으로 가입 후 로그인됩니다.(카카오)");
 			userService.회원가입(kakaoUser);
 		}
 		// 로그인처리
-		System.out.println("자동으로 로그인됩니다.");
+		System.out.println("카카오 로그인 요청");
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(kakaoUser.getUsername(), hongKey));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
