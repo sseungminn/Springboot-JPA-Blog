@@ -33,7 +33,7 @@ function onKeyDown() {
 			<h1></h1> <!-- 여백용 h1태그 -->
 			
 			<!-- 카카오 로그인(카카오정보로 블로그 회원가입)-->
-			<a href="https://kauth.kakao.com/oauth/authorize?client_id=e5056e73c622d1ca7da441fa86d21d2b&redirect_uri=http://localhost:8000/auth/kakao/callback&response_type=code"> 
+			<a href="https://kauth.kakao.com/oauth/authorize?client_id=e5056e73c622d1ca7da441fa86d21d2b&redirect_uri=http://ec2-3-34-7-153.ap-northeast-2.compute.amazonaws.com:8000/auth/kakao/callback&response_type=code"> 
 				<img height="40px" src="/image/kakao_login_medium_narrow.png" />
 			</a> <br />
 			 <h1></h1>
