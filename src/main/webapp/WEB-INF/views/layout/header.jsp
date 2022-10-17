@@ -15,6 +15,14 @@ function logout(){
 		location.href="/logout";
 	}
 }
+function activeChat(){
+	var cb = $('.chatBox').css("display");
+	if(cb == "none"){
+		$(".chatBox").css("display","");
+	} else{
+		$(".chatBox").css("display","none");
+	}
+};
 </script>
 
 <title>Blog </title>
