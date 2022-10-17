@@ -30,7 +30,7 @@ let index = {
 			contentType: "application/json; charset=utf-8", 
 			dataType: "json"
 		}).done(function(){ 
-			alert("글쓰기가 완료되었습니다.");
+//			alert("글쓰기가 완료되었습니다.");
 			location.href = "/";
 		}).fail(function(error){
 			alert(JSON.stringify(error));
@@ -46,7 +46,7 @@ let index = {
 			url: `/api/board/${id}`,
 			dataType: "json"
 		}).done(function(){ 
-			alert("삭제가 완료되었습니다.");
+//			alert("삭제가 완료되었습니다.");
 			location.href = `/?page=${page}&search=${search}`;
 		}).fail(function(error){
 			alert(JSON.stringify(error));
@@ -69,7 +69,7 @@ let index = {
 			contentType: "application/json; charset=utf-8", 
 			dataType: "json"
 		}).done(function(){ 
-			alert("글수정이 완료되었습니다.");
+//			alert("글수정이 완료되었습니다.");
 			location.href = `/board/${id}?page=${page}&search=${search}`;
 		}).fail(function(error){
 			alert(JSON.stringify(error));
@@ -91,7 +91,7 @@ let index = {
 			contentType: "application/json; charset=utf-8", 
 			dataType: "json"
 		}).done(function(){ 
-			alert("댓글쓰기가 완료되었습니다.");
+//			alert("댓글쓰기가 완료되었습니다.");
 			location.href = `/board/${data.boardId}?page=${page}&search=${search}`;
 		}).fail(function(error){
 			alert(JSON.stringify(error));
@@ -106,7 +106,7 @@ let index = {
 			url: `/api/board/${boardId}/reply/${replyId}`,
 			dataType: "json"
 		}).done(function(){ 
-			alert("댓글삭제 성공");
+//			alert("댓글삭제 성공");
 			location.href = `/board/${boardId}?page=${page}&search=${search}`;
 		}).fail(function(error){
 			alert(JSON.stringify(error));
