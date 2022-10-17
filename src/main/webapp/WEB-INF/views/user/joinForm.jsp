@@ -50,10 +50,11 @@ function onKeyDown() {
 		<h1></h1>
 		
 		<!-- 페북 로그인(페북정보로 블로그 회원가입) -->
-		<a href="/oauth2/authorization/facebook">
-			<img height="37px"  width="164px" src="/image/facebook_btn.png" />
-		</a><br />
-		<h1></h1>
+		<!-- AWS HTTPS 설정 안 했음 페북은 나중에? -->
+<!-- 		<a href="/oauth2/authorization/facebook"> -->
+<!-- 			<img height="37px"  width="164px" src="/image/facebook_btn.png" /> -->
+<!-- 		</a><br /> -->
+<!-- 		<h1></h1> -->
 		
 		<!--  네이버 로그인(네이버정보로 블로그 회원가입) -->
 		<a href="/oauth2/authorization/naver">

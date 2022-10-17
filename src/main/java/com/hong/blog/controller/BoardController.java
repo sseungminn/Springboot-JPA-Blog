@@ -25,7 +25,7 @@ public class BoardController {
 	@GetMapping({"", "/"})
 	public String index(Model model, @PageableDefault(size=5, sort="id", direction=Sort.Direction.DESC) Pageable pageable, String search, HttpServletRequest request) {
 		Page<Board> boardList;
-		if(search == null) {
+		if(search == null || search.equals("")) {
 			boardList = boardService.글목록(pageable);	
 		} else {
 			boardList = boardService.글검색목록(pageable, search);

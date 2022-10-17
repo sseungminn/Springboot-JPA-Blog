@@ -5,7 +5,7 @@
 	<form>
 		<div class="form-group">
 <!-- 			<label for="title">Title</label>  -->
-			<input type="text" class="form-control"  placeholder="Enter title" id="title">
+			<input type="text" class="form-control"  placeholder="Enter title" id="title" autofocus>
 		</div>
 
 		<div class="form-group">
