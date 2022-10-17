@@ -56,4 +56,14 @@ public class UserApiController {
 			return false;	
 		}
 	}
+	
+	@PostMapping("/auth/emailCheck")
+	public boolean emailCheck(@RequestParam("email") String email) {
+		User user = userService.이메일로회원찾기(email);
+		if(user == null) { // 존재하는 회원이 없음 -> 가입 가능
+			return true;
+		}else {
+			return false;	
+		}
+	}
 }

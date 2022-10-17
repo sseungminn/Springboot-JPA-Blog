@@ -25,6 +25,13 @@ public class UserService {
 		return user;
 	}
 	
+	@Transactional(readOnly = true)
+	public User 이메일로회원찾기(String email) {
+		User user = userRepository.findByEmail(email);
+		return user;
+	}
+	
+	
 	@Transactional
 	public void 회원가입(User user) {
 		String rawPassword = user.getPassword(); // 암호화 전 비밀번호

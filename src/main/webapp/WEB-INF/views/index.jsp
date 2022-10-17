@@ -1,7 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="layout/header.jsp"%>
-
+<script>
+function activeChat(){
+	var cb = $('.chatBox').css("display");
+	if(cb == "none"){
+		$(".chatBox").css("display","");
+	} else{
+		$(".chatBox").css("display","none");
+	}
+};
+</script>
 <div class="container search-bar input-group mb-3">
 	<form class="form-inline">
 	  <input type="search" name="search"  value="${param.search}" class="form-control rounded-pill" placeholder="Enter title to search" autofocus>&nbsp;
@@ -26,6 +35,5 @@
 	</c:forEach>
 <%@ include file="layout/paging.jsp"%>
 </div>
-
 <%@ include file="layout/footer.jsp"%>
 

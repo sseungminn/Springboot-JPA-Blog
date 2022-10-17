@@ -23,8 +23,9 @@ function onKeyDown() {
 		</div>
 
 		<div class="form-group">
-			<label for="email">Email</label> <input type="email" class="form-control" placeholder="Enter email" id="email" autocomplete="off">
-			<div id="emailError" ></div>
+			<label for="email">Email</label> <input type="email" class="form-control emailCheck" placeholder="Enter email" id="email" autocomplete="off">
+			<div id="emailError1" ></div>
+			<div id="emailError2" ></div>
 		</div>
 
 		<div class="form-group">
