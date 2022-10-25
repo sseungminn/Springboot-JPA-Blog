@@ -43,6 +43,19 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 		
+		<!-- 웹소켓 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
 		<!-- 추가 라이브러리 종료 -->
 
 		<dependency>
@@ -116,5 +129,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

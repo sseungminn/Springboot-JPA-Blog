@@ -29,11 +29,12 @@ function onKeyDown() {
 	</c:if>
 		<div class="form-group">
 			<label for="email">Email</label> 
-			<input type="email" value="${principal.user.email }" class="form-control" placeholder="Enter email" id="email" ${principal.user.oauth != null ? 'readonly' : '' }>
+			<input type="email" value="${principal.user.email }" class="form-control" readonly id="email" ${principal.user.oauth != null ? 'readonly' : '' }>
 		</div>
 		<div class="form-group">
 			<label for="originNickname">Nickname</label> 
-			<input type="text" value="${principal.user.originNickname }" class="form-control" placeholder="Enter nickname" id="originNickname" ${principal.user.oauth != null ? 'readonly' : '' }>
+			<input type="text" value="${principal.user.originNickname }" class="form-control nicknameCheck" placeholder="Enter nickname" id="originNickname" ${principal.user.oauth != null ? 'readonly' : '' }>
+			<div id="nicknameError" ></div>
 		</div>
 		
 	</form>

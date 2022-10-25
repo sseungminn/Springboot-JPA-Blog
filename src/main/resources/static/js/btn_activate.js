@@ -1,12 +1,17 @@
 $(function() {
 	// user update form
-	$("#password").on('propertychange change keyup paste input', function() {
-		if ($("#username").val() == '' || $("#password").val() == '') {
+	$("#password, #originNickname").on('propertychange change keyup paste input', function() {
+		if ($("#originNickname").val() == '' || $("#password").val() == '') {
 			$("#btn-login").attr("disabled", true);
 			$("#btn-update").attr("disabled", true);
 		} else {
-			$("#btn-login").attr("disabled", false);
-			$("#btn-update").attr("disabled", false);
+			if($("#nicknameError").css("color")=="rgb(0, 128, 0)" || $("#nicknameError").val()=="" || $("#nicknameError").val()== null){ // 초록색이면
+				$("#btn-login").attr("disabled", false);
+				$("#btn-update").attr("disabled", false);
+			} else {
+				$("#btn-login").attr("disabled", true);
+				$("#btn-update").attr("disabled", true);
+			}
 		}
 	}),
 
@@ -16,7 +21,14 @@ $(function() {
 		if ($("#username").val() == '' || $("#password").val() == '' || $("#email").val() == '' || $("#originNickname").val() == '') {
 			$("#btn-save").attr("disabled", true);
 		} else {
-			$("#btn-save").attr("disabled", false);
+			if($("#idError").css("color")=="rgb(0, 128, 0)" && 
+				$("#emailError1").css("color")=="rgb(0, 128, 0)" && 
+				$("#emailError2").css("color")=="rgb(0, 128, 0)" &&
+				$("#nicknameError").css("color")=="rgb(0, 128, 0)") { // 초록색이면
+				$("#btn-save").attr("disabled", false);
+			} else {
+				$("#btn-save").attr("disabled", true);
+			}
 		}
 	}),
 	
@@ -35,7 +47,7 @@ $(function() {
 					fontColor = "red";
 					comment = "이미 존재하는 아이디입니다.";
 					$("#btn-save").attr("disabled", true);
-				} else{
+				} else {
 					fontColor = "green";
 					comment = "사용 가능한 아이디입니다.";
 				}
@@ -65,13 +77,44 @@ $(function() {
 					fontColor = "red";
 					comment = "이미 존재하는 이메일입니다.";
 					$("#btn-save").attr("disabled", true);
-				} else{
+				} else {
 					fontColor = "green";
 					comment = "사용 가능한 이메일입니다.";
 				}
 				$("#emailError2").css("font-size", 7);
 				$("#emailError2").css("color", fontColor);
 				$("#emailError2").html(comment);
+			},
+			error: function(){
+				alert("서버요청실패");
+			}
+		})
+		
+	}),
+	
+	// 회원가입 닉네임 중복체크
+	$(".nicknameCheck").on('propertychange change keyup paste input', function() {
+		let nicknameValue = $("#originNickname").val();
+		let fontColor;
+		let comment;
+		$.ajax({
+			url: "/auth/nicknameCheck",
+			type: "POST",
+			data: {originNickname: nicknameValue},
+			dataType: 'json',
+			success: function(result){
+				if(result==0){
+					fontColor = "red";
+					comment = "이미 존재하는 닉네임입니다.";
+					$("#btn-save").attr("disabled", true);
+					$("#btn-update").attr("disabled", true);
+				} else {
+					fontColor = "green";
+					comment = "사용 가능한 닉네임입니다.";
+				}
+				$("#nicknameError").css("font-size", 7);
+				$("#nicknameError").css("color", fontColor);
+				$("#nicknameError").html(comment);
 			},
 			error: function(){
 				alert("서버요청실패");
@@ -90,7 +133,7 @@ $(function() {
 			comment = '이메일 형식이 잘못되었습니다.';
 			$("#emailError2").attr("hidden", true);
 			$("#btn-save").attr("disabled", true);
-		} else{
+		} else {
 			fontColor = "green"; 
 			comment = '올바른 이메일 형식입니다.';
 			$("#emailError2").attr("hidden", false);

@@ -85,10 +85,10 @@ public class BoardController {
 		return "board/saveForm";
 	}
 	
-	@RequestMapping("/chat/{originNickname}")
+	@RequestMapping("/vchat/{originNickname}")
 	public String chat(@PathVariable String originNickname, Model model) {
 		model.addAttribute("me", originNickname);
-		return "chat";
+		return "vchat";
 	}
 	
 }

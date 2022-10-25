@@ -1,5 +1,7 @@
 package com.hong.blog.controller.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -61,6 +63,16 @@ public class UserApiController {
 	public boolean emailCheck(@RequestParam("email") String email) {
 		User user = userService.이메일로회원찾기(email);
 		if(user == null) { // 존재하는 회원이 없음 -> 가입 가능
+			return true;
+		}else {
+			return false;	
+		}
+	}
+	
+	@PostMapping("/auth/nicknameCheck")
+	public boolean nicknameCheck(@RequestParam("originNickname") String originNickname) {
+		List<User> user = userService.닉네임으로회원찾기(originNickname);
+		if(user.size() == 0) { // 존재하는 회원이 없음 -> 가입 가능
 			return true;
 		}else {
 			return false;	

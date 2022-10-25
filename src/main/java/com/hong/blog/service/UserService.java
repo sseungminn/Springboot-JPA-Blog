@@ -1,5 +1,7 @@
 package com.hong.blog.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,11 @@ public class UserService {
 		return user;
 	}
 	
+	@Transactional(readOnly = true)
+	public List<User> 닉네임으로회원찾기(String originNickname) {
+		List<User> user = userRepository.findByOriginNickname(originNickname);
+		return user;
+	}
 	
 	@Transactional
 	public void 회원가입(User user) {

@@ -29,7 +29,8 @@ function onKeyDown() {
 		</div>
 
 		<div class="form-group">
-			<label for="originNickname">Nickname</label> <input type="text" class="form-control" placeholder="Enter nickname" id="originNickname" autocomplete="off">
+			<label for="originNickname">Nickname</label> <input type="text" class="form-control nicknameCheck" placeholder="Enter nickname" id="originNickname" autocomplete="off">
+			<div id="nicknameError" ></div>
 		</div>
 		
 	</form>

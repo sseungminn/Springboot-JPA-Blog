@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../layout/header.jsp"%>
 <script>
 let page = new URLSearchParams(location.search).get('page');
@@ -28,7 +29,9 @@ function replyDelete(boardId, replyId){
 	<br /> <br />
 
 	<div>
-		글 번호 : <span id="id"><i>${board.id } </i></span> <br /> 작성자 : <span><i>${board.user.nickname } </i></span>
+		<span style="font-size: 10pt; color: gray;"><i><fmt:formatDate value="${board.createDate }" type="both"/></i></span><br/>
+		글 번호 : <span id="id"><i>${board.id } </i></span> <br/> 
+		작성자 : <span><i>${board.user.nickname } </i></span> <br/>
 	</div>
 
 	<br />
@@ -66,9 +69,18 @@ function replyDelete(boardId, replyId){
 		<ul id="reply-box" class="list-group">
 			<c:forEach var="reply" items="${board.replys }">
 				<li id="reply-${reply.id}" class="list-group-item d-flex justify-content-between">
+					<!-- 댓글 내용 -->
 					<div>${reply.content }</div>
 					<div class="d-flex">
-						<div class="font-italic">${reply.user.nickname }&nbsp;</div>
+						<!-- 댓글 작성자 -->
+						<div class="font-italic">${reply.user.nickname }</div>
+						&nbsp;&nbsp;
+						<!-- 댓글 작성시간 -->
+						<div style="font-size: 8pt; color: gray;">
+							<fmt:formatDate value="${reply.createDate }" type="both"/><br>
+						</div>
+						&nbsp;&nbsp;
+						<!-- 댓글 삭제 버튼 -->
 						<c:if test="${principal.user.username ==reply.user.username }">
 							<button onClick="replyDelete(${board.id}, ${reply.id})" class="badge">삭제</button>
 						</c:if>

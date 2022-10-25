@@ -22,7 +22,16 @@ function activeChat(){
 	} else{
 		$(".chatBox").css("display","none");
 	}
-};
+}
+
+function activeChat2(){
+	var cb = $('.chatBox2').css("display");
+	if(cb == "none"){
+		$(".chatBox2").css("display","");
+	} else{
+		$(".chatBox2").css("display","none");
+	}
+}
 </script>
 
 <title>Blog </title>
