@@ -15,9 +15,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://blog.cytrdvvkoauk.ap-northeast-2.rds.amazonaws.com:3307/blogAWS?serverTimezone=Asia/Seoul
-    username: hong
-    password: hong1234
+    url: jdbc:mysql://ENDPOINT/DBName?serverTimezone=Asia/Seoul
+    username: 
+    password: 
       
   jpa:
     open-in-view: true
@@ -44,28 +44,28 @@ spring:
       client:
         registration:
           google:
-            client-id: 581936500239-9q9mgjiq03ciaou7m9aheios1211ncqk.apps.googleusercontent.com
-            client-secret: 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
+            client-id: 
+            client-secret: 
             scope:
             - email
             - profile
           
           facebook:
-            client-id: 1544989799316085
-            client-secret: 7e632ac425a3b510a240b266594fa4b0
+            client-id: 
+            client-secret: 
             scope:
             - email
             - public_profile
            
           naver:
-            client-id: vEDDC8YKf4GFCJHAMiUM
-            client-secret: VENilxKBHr
+            client-id: 
+            client-secret: 
             scope:
             - name
             - email
             client-name: Naver
             authorization-grant-type: authorization_code
-            redirect-uri: http://ec2-3-34-7-153.ap-northeast-2.compute.amazonaws.com:8000/login/oauth2/code/naver
+            redirect-uri: URI/login/oauth2/code/naver
           
         provider: 
           naver:
@@ -75,4 +75,4 @@ spring:
             user-name-attribute: response # 회원정보를 json으로 받는데 response라는 키값으로 네이버가 return 해줌
               
 hong:
-  key: hong1234
+  key: 
